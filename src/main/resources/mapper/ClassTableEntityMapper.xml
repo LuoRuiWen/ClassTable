@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.luo.dao.ClassTableEntityMapper">
+  <resultMap id="BaseResultMap" type="com.luo.entity.ClassTableEntity">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="class_name" jdbcType="VARCHAR" property="className" />
+    <result column="class_gread" jdbcType="INTEGER" property="classGread" />
+    <result column="class_type" jdbcType="INTEGER" property="classType" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="id_deleted" jdbcType="BIT" property="idDeleted" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, class_name, class_gread, class_type, create_time, id_deleted
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from class_table
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from class_table
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.luo.entity.ClassTableEntity">
+    insert into class_table (id, class_name, class_gread, 
+      class_type, create_time, id_deleted
+      )
+    values (#{id,jdbcType=VARCHAR}, #{className,jdbcType=VARCHAR}, #{classGread,jdbcType=INTEGER}, 
+      #{classType,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{idDeleted,jdbcType=BIT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.luo.entity.ClassTableEntity">
+    insert into class_table
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="className != null">
+        class_name,
+      </if>
+      <if test="classGread != null">
+        class_gread,
+      </if>
+      <if test="classType != null">
+        class_type,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="idDeleted != null">
+        id_deleted,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="className != null">
+        #{className,jdbcType=VARCHAR},
+      </if>
+      <if test="classGread != null">
+        #{classGread,jdbcType=INTEGER},
+      </if>
+      <if test="classType != null">
+        #{classType,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="idDeleted != null">
+        #{idDeleted,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.luo.entity.ClassTableEntity">
+    update class_table
+    <set>
+      <if test="className != null">
+        class_name = #{className,jdbcType=VARCHAR},
+      </if>
+      <if test="classGread != null">
+        class_gread = #{classGread,jdbcType=INTEGER},
+      </if>
+      <if test="classType != null">
+        class_type = #{classType,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="idDeleted != null">
+        id_deleted = #{idDeleted,jdbcType=BIT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.luo.entity.ClassTableEntity">
+    update class_table
+    set class_name = #{className,jdbcType=VARCHAR},
+      class_gread = #{classGread,jdbcType=INTEGER},
+      class_type = #{classType,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      id_deleted = #{idDeleted,jdbcType=BIT}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,51 @@
+server:
+  port: 8089
+
+spring:
+  application:
+    name: ClassTable
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      name: App_zxy
+      url: jdbc:mysql://47.103.5.171:3306/class_table_plat?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8&useSSL=false #oracle : jdbc:oracle:thin:@10.20.149.85:1521:ocnauto
+      username: lrw
+      password: Mm123456
+      driver-class-name: com.mysql.jdbc.Driver
+      filters: stat
+      max-active: 20
+      initial-size: 1
+      max-wait: 60000
+      min-idle: 1
+      timeBetween-eviction-runs-millis: 60000
+      min-evictable-idle-time-millis: 300000
+      validation-query: select 'x'
+      test-whileIdle: true
+      test-on-borrow: false
+      test-on-return: false
+      pool-prepared-statements: true
+      max-open-prepared-statements: 20
+      filter:
+        config:
+          enabled: true
+        stat:
+          log-slow-sql: true
+          slow-sql-millis: 1000
+          merge-sql: false
+        wall:
+          config:
+            multi-statement-allow: true
+#  thymeleaf:
+#    prefix: classpath:/templates/
+#    suffix: .html
+#    mode: HTML5
+#    encoding: UTF-8
+#    servlet:
+#      content-type: text/html
+#    cache: false
+  resources:
+    chain:
+      strategy:
+        content:
+          enabled: true
+          paths: /**

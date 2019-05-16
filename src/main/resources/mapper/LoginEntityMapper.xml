@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.luo.dao.LoginEntityMapper">
+  <resultMap id="BaseResultMap" type="com.luo.entity.LoginEntity">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="teacher_id" jdbcType="VARCHAR" property="teacherId" />
+    <result column="student_id" jdbcType="VARCHAR" property="studentId" />
+    <result column="sys_mem_id" jdbcType="VARCHAR" property="sysMemId" />
+    <result column="athorization" jdbcType="VARCHAR" property="athorization" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="effect_time" jdbcType="TIMESTAMP" property="effectTime" />
+    <result column="end_time" jdbcType="TIMESTAMP" property="endTime" />
+    <result column="is_delete" jdbcType="BIT" property="isDelete" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, teacher_id, student_id, sys_mem_id, athorization, create_time, effect_time, end_time, 
+    is_delete
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from login
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from login
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.luo.entity.LoginEntity">
+    insert into login (id, teacher_id, student_id, 
+      sys_mem_id, athorization, create_time, 
+      effect_time, end_time, is_delete
+      )
+    values (#{id,jdbcType=VARCHAR}, #{teacherId,jdbcType=VARCHAR}, #{studentId,jdbcType=VARCHAR}, 
+      #{sysMemId,jdbcType=VARCHAR}, #{athorization,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{effectTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, #{isDelete,jdbcType=BIT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.luo.entity.LoginEntity">
+    insert into login
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="teacherId != null">
+        teacher_id,
+      </if>
+      <if test="studentId != null">
+        student_id,
+      </if>
+      <if test="sysMemId != null">
+        sys_mem_id,
+      </if>
+      <if test="athorization != null">
+        athorization,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="effectTime != null">
+        effect_time,
+      </if>
+      <if test="endTime != null">
+        end_time,
+      </if>
+      <if test="isDelete != null">
+        is_delete,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="teacherId != null">
+        #{teacherId,jdbcType=VARCHAR},
+      </if>
+      <if test="studentId != null">
+        #{studentId,jdbcType=VARCHAR},
+      </if>
+      <if test="sysMemId != null">
+        #{sysMemId,jdbcType=VARCHAR},
+      </if>
+      <if test="athorization != null">
+        #{athorization,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="effectTime != null">
+        #{effectTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null">
+        #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDelete != null">
+        #{isDelete,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.luo.entity.LoginEntity">
+    update login
+    <set>
+      <if test="teacherId != null">
+        teacher_id = #{teacherId,jdbcType=VARCHAR},
+      </if>
+      <if test="studentId != null">
+        student_id = #{studentId,jdbcType=VARCHAR},
+      </if>
+      <if test="sysMemId != null">
+        sys_mem_id = #{sysMemId,jdbcType=VARCHAR},
+      </if>
+      <if test="athorization != null">
+        athorization = #{athorization,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="effectTime != null">
+        effect_time = #{effectTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null">
+        end_time = #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDelete != null">
+        is_delete = #{isDelete,jdbcType=BIT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.luo.entity.LoginEntity">
+    update login
+    set teacher_id = #{teacherId,jdbcType=VARCHAR},
+      student_id = #{studentId,jdbcType=VARCHAR},
+      sys_mem_id = #{sysMemId,jdbcType=VARCHAR},
+      athorization = #{athorization,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      effect_time = #{effectTime,jdbcType=TIMESTAMP},
+      end_time = #{endTime,jdbcType=TIMESTAMP},
+      is_delete = #{isDelete,jdbcType=BIT}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
